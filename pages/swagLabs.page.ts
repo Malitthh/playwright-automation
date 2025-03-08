@@ -6,12 +6,26 @@ export class swagLabs {
     readonly common: any;
     readonly loadingSpinner: Locator;
     readonly iframeLocator: FrameLocator;
+    private filterMapping: Record<string, Locator>;
+    readonly graphArea;
+    readonly tableArea;
 
     constructor(page: Page) {
         this.page = page;
         this.common = new commons(page);
         this.loadingSpinner = page.locator('div.spinner-border');
         this.iframeLocator = page.getByLabel('SwagLabs Checkout').locator('iframe').contentFrame();
+        this.graphArea = page.locator('div.graph-area');
+        this.tableArea = page.locator('div.table-area');
+
+        // Initialize the filter mapping here
+        this.filterMapping = {
+            'Item': this.common.allItemFilter,
+            'Bag Name': this.common.BagNameNameFilter,
+            'Swag Name': this.common.SwagNameFilter,
+            'Shoe Name': this.common.ShoeNameFilter,
+            'Hoodie': this.common.HoodieFilter
+        };
     }
 
     /**
@@ -40,5 +54,16 @@ export class swagLabs {
             const afterTableScreenshot = await commons.captureScreenshot(tableArea, afterScreenshotPathTable);
             expect(beforeTableScreenshot).not.toEqual(afterTableScreenshot);
         }
+    }
+
+    /**
+     * @description verify filters in SwagLabs Order Item Page
+     * @example swagLabs.OrderItemsFilter()
+     */
+    async OrderItemsFilter(filterTopic: string) {
+        const expectedFilterElement = this.filterMapping[filterTopic];
+        await this.common.filterSearchBox.click();
+        await this.common.filterSearchBox.type(filterTopic);
+        await expect(expectedFilterElement).toBeVisible();
     }
 }
