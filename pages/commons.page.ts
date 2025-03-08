@@ -1,5 +1,6 @@
-const { test, expect } = require('@playwright/test');
-import { Locator, Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class commons {
     readonly page: Page;
@@ -122,6 +123,57 @@ export class commons {
         console.log('Expected Total:', expectedTotal);
         await this.finishButton.click();
         await expect(this.orderConfirmationText).toBeVisible();
+    }
+
+    /**
+     * @description create a screenshots Directory
+     */
+    static createScreenshotsDir(): string {
+        const screenshotsDir = path.resolve(process.cwd(), 'screenshots');
+        if (!fs.existsSync(screenshotsDir)) {
+            fs.mkdirSync(screenshotsDir, { recursive: true });
+        }
+        return screenshotsDir;
+    }
+    /**
+     * @description generate current time
+     * @example getTimestamp()
+     */
+
+    static getTimestamp(): string {
+        return new Date().toISOString().replace(/[:.]/g, '-');
+    }
+    /**
+     * @description capture a screenshot
+     * @example commons.captureScreenshot(Locator, GeneratedFilePath)
+     */
+
+    static async captureScreenshot(locator: Locator, screenshotPath: string): Promise<Buffer> {
+        return await locator.screenshot({ path: screenshotPath });
+    }
+    /**
+     * @description generate a file path
+     * @example commons.generateFilePath('FileName', 'State')
+     */
+
+    static generateFilePath(type: string, state: string): string {
+        const screenshotsDir = this.createScreenshotsDir();
+        return path.join(screenshotsDir, `${type}-${state}-${this.getTimestamp()}.png`);
+    }
+    /**
+     * @description Deletes all screenshots from the screenshots directory.
+     * @example commons.cleanScreenshots()
+     */
+
+    static async cleanScreenshots() {
+        const screenshotsDir = path.resolve(process.cwd(), 'screenshots');
+        if (fs.existsSync(screenshotsDir)) {
+            const files = fs.readdirSync(screenshotsDir);
+            files.forEach((file) => {
+                fs.unlinkSync(path.join(screenshotsDir, file));
+            });
+            console.log('Screenshots cleaned after each test.');
+        }
     }
 }
 export default commons;
