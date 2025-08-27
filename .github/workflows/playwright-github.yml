@@ -25,7 +25,7 @@ jobs:
       # - name: Run Playwright tests
       #   run: npx playwright test
       - name: Run Playwright tests
-        run: npx playwright test tests/SwagLabs/addTocart.spec.ts
+        run: npx playwright test -- tests/SwagLabs/addTocart.spec.ts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
