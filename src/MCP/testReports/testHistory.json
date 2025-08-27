@@ -1,0 +1,47 @@
+{
+  "history": [
+    {
+      "date": "20250827",
+      "sequence": "001",
+      "summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0
+      },
+      "testCases": [
+        {
+          "name": "Username Length Validation",
+          "status": "pass",
+          "duration": "00:00:35"
+        },
+        {
+          "name": "Email Format Validation",
+          "status": "pass",
+          "duration": "00:00:30"
+        },
+        {
+          "name": "Password Length Validation (Minimum)",
+          "status": "pass",
+          "duration": "00:00:35"
+        },
+        {
+          "name": "Password Length Validation (Maximum)",
+          "status": "pass",
+          "duration": "00:00:35"
+        },
+        {
+          "name": "Password Case Validation",
+          "status": "pass",
+          "duration": "00:00:45"
+        },
+        {
+          "name": "Password Number Validation",
+          "status": "pass",
+          "duration": "00:00:35"
+        }
+      ],
+      "duration": "00:03:45"
+    }
+  ]
+}

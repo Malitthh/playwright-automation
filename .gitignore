@@ -1,4 +1,12 @@
+/playwright.yml/
+/playwright-api.yml/
 node_modules/
 /test-results/
+/reports/
 /playwright-report/
+/blob-report/
 /playwright/.cache/
+/downloads/
+/src/EAI/responseData/
+/src/REGBASE/responseData/
+

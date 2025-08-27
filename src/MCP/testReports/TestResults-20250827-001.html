@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Results - Form Validation Tests</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .main-content {
+            margin-top: 200px;
+        }
+        .charts-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .chart-wrapper {
+            width: 45%;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-case {
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .test-header {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pass .test-header { background-color: #dff0d8; }
+        .fail .test-header { background-color: #f2dede; }
+        .skip .test-header { background-color: #fcf8e3; }
+        .test-content {
+            padding: 15px;
+            display: none;
+        }
+        .test-content.show { display: block; }
+        .details { margin-left: 20px; }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th { background-color: #f5f5f5; }
+        .status-icon {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        .validation-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .validation-list li {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .validation-list li.pass {
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+        }
+        .validation-list li.fail {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-header">
+        <h1>Test Results - Form Validation Tests</h1>
+        <div class="summary-card">
+            <p><strong>Date:</strong> August 27, 2025</p>
+            <p><strong>Total Tests:</strong> 6</p>
+            <p><strong>Passed:</strong> 6</p>
+            <p><strong>Failed:</strong> 0</p>
+            <p><strong>Duration:</strong> 00:03:45</p>
+        </div>
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <canvas id="summaryPieChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="trendLineChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <input type="text" class="search-box" placeholder="Search test cases..." id="searchBox">
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Username Length Validation
+                </span>
+                <span>Duration: 00:00:35</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter username longer than 15 characters</td>
+                        <td>Error message: "Use maximum 15 character"</td>
+                        <td>Error message displayed: "Use maximum 15 character"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Email Format Validation
+                </span>
+                <span>Duration: 00:00:30</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter invalid email format</td>
+                        <td>Error message: "Your email address isn't formatted correctly"</td>
+                        <td>Error message displayed: "Your email address isn't formatted correctly"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Password Length Validation (Minimum)
+                </span>
+                <span>Duration: 00:00:35</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter password with less than 4 characters</td>
+                        <td>Error message: "Use 4 character or longer"</td>
+                        <td>Error message displayed: "Use 4 character or longer"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Password Length Validation (Maximum)
+                </span>
+                <span>Duration: 00:00:35</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter password with more than 12 characters</td>
+                        <td>Error message: "Use maximum 12 character"</td>
+                        <td>Error message displayed: "Use maximum 12 character"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Password Case Validation
+                </span>
+                <span>Duration: 00:00:45</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter password without lowercase</td>
+                        <td>Error message: "One lower letter required"</td>
+                        <td>Error message displayed: "One lower letter required"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Enter password without uppercase</td>
+                        <td>Error message: "One upper letter required"</td>
+                        <td>Error message displayed: "One upper letter required"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-case pass">
+            <div class="test-header" onclick="toggleTestCase(this)">
+                <span>
+                    <span class="status-icon">✅</span>
+                    Password Number Validation
+                </span>
+                <span>Duration: 00:00:35</span>
+            </div>
+            <div class="test-content">
+                <table>
+                    <tr>
+                        <th>Test Step</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Enter password without numbers</td>
+                        <td>Error message: "One number required"</td>
+                        <td>Error message displayed: "One number required"</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle test case details
+        function toggleTestCase(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+        }
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchText = e.target.value.toLowerCase();
+            document.querySelectorAll('.test-case').forEach(testCase => {
+                const testName = testCase.querySelector('.test-header').textContent.toLowerCase();
+                testCase.style.display = testName.includes(searchText) ? 'block' : 'none';
+            });
+        });
+
+        // Summary Pie Chart
+        const pieCtx = document.getElementById('summaryPieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Passed', 'Failed', 'Skipped'],
+                datasets: [{
+                    data: [6, 0, 0],
+                    backgroundColor: ['#dff0d8', '#f2dede', '#fcf8e3']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Test Execution Summary'
+                    }
+                }
+            }
+        });
+
+        // Trend Line Chart
+        const lineCtx = document.getElementById('trendLineChart').getContext('2d');
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: ['Aug 27, 2025'],
+                datasets: [{
+                    label: 'Passed',
+                    data: [6],
+                    borderColor: '#dff0d8',
+                    tension: 0.1
+                },
+                {
+                    label: 'Failed',
+                    data: [0],
+                    borderColor: '#f2dede',
+                    tension: 0.1
+                },
+                {
+                    label: 'Skipped',
+                    data: [0],
+                    borderColor: '#fcf8e3',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Test Results Trend'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

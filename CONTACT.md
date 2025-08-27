@@ -1,4 +1,5 @@
 ### Contact
 
-### Logging My Concern - Git Username: [Your Git Username] | Email: [Your Email] | Discord: [Your DC Username]
-
+**GitHub Username:** `[your-github-username]`  
+**Email:** `[your-email-address]`  
+**Discord:** `[your-discord-username]`

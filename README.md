@@ -1,71 +1,188 @@
-## Playwright-Automation
+## Playwright-Automation Framework
 
-### Description
+Welcome to the Playwright-Automation repository! This project is designed to help beginners and contributors get started with open-source test automation using Playwright. Here, you’ll find everything you need to set up, run, and contribute to UI and API test scripts, focusing on legitimate free APIs and UIs.
 
-Join us in this welcoming GitHub repository dedicated to empowering and engaging novice contributors in the world of open-source projects. We are focused on incorporating Playwright test scripts for both UI and API testing, while exclusively utilizing legitimate free APIs and UIs to automate these scripts. Contribute, learn, and grow with us as we collaborate on open-source projects!
+![Playwright Banner](./playwright-banner.png)
 
-![alt playwright-banner](./playwright-banner.png)
+---
 
 ### Table of Contents
 
-1. Prerequisites
-2. Installation
-3. Running the Tests
-4. Report Generation
-5. Contact
+1. [Prerequisites](#prerequisites)
+2. [Installation](#installation)
+3. [Running Tests](#running-tests)
+4. [Tagging & Filtering](#tagging--filtering)
+5. [Report Generation](#report-generation)
+6. [Contribution Guidelines](#contribution-guidelines)
+7. [Contact](#contact)
+
+---
 
 ### Prerequisites
 
-1. Node.js
-2. Visual Studio Code 
-3. Git Version Control
+Before you begin, ensure you have the following installed:
 
-Refer [CONTRIBUTING.md](https://github.com/Malitthh/playwright-automation/blob/main/CONTRIBUTING.md) before sending a PR.
+- [Node.js](https://nodejs.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Git](https://git-scm.com/)
 
+Refer to [CONTRIBUTING.md](https://github.com/Malitthh/playwright-automation/blob/main/CONTRIBUTING.md) for contribution rules.
 
-Create your profile for hacktoberfest [here](https://hacktoberfest.com/profile/).
+---
 
 ### Installation
 
-for creating a new project,
+**For a new Playwright project:**
 
-1. Download Node.js
-2. Set "NODE_HOME" env variables
-3. Create Playwright working folder
-4. Generate package.json
-5. Go inside the project folder and do CMD
-6. `npm init playwright@latest`
+1. Install Node.js and set up the `NODE_HOME` environment variable.
+2. Create a working folder for Playwright.
+3. Initialize your project:
+   ```bash
+   npm init playwright@latest
+   ```
 
-for this project,
+**For this repository:**
 
-1. Type `npm install` on IDE terminal should be enough.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Malitthh/playwright-automation
+   cd <repository-directory>
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Install Playwright browsers:
+   ```bash
+   npx playwright install
+   ```
 
-### Running the Tests
+---
 
-1. `npx playwright test --ui` - UI mode
-2. `npx playwright test` - run all tests
-3. `npx playwright test TC.spec.ts` - run a specific test
-4. `npx playwright test TC.spec.ts --headed` - run a specific test with UI
-5. `npx playwright test TC.spec.ts --project chromium --headed` - run a specific test with UI with specific browser
+### Running Tests
+
+You can run tests in several ways:
+
+- **UI Mode:**  
+  ```bash
+  npx playwright test --ui
+  ```
+- **All Tests:**  
+  ```bash
+  npx playwright test
+  ```
+- **Specific Test File:**  
+  ```bash
+  npx playwright test TC.spec.ts
+  ```
+- **Headed Mode:**  
+  ```bash
+  npx playwright test TC.spec.ts --headed
+  ```
+- **Specific Browser:**  
+  ```bash
+  npx playwright test TC.spec.ts --project chromium --headed
+  ```
+
+**Using VS Code:**  
+Install the [Playwright Runner VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ortoni.ortoni) for easy test execution from the editor.
+
+**Command Line Shortcut:**  
+```bash
+npm run e2e
+npm run e2e tests/example.spec.ts --project=chromium
+```
+
+---
 
 ### Playwright Recorder
 
-1. `npx playwright codegen --test-id-attribute="data-cy"` - playwright recorder
+Generate code using the Playwright recorder:
+```bash
+npx playwright codegen --test-id-attribute="data-cy"
+```
+
+---
+
+### Tagging & Filtering
+
+Tag your tests for selective execution:
+
+```js
+test('Login: Validate successful login @smoke', async ({ page }) => { ... });
+test('Dashboard: Check pagination controls @regression', async ({ page }) => { ... });
+test('Profile: Confirm user role permissions @smoke @regression', async ({ page }) => { ... });
+```
+
+**Run tests by tag:**
+```bash
+npx playwright test --grep '@smoke'
+```
+
+**Exclude tags:**
+```bash
+npx playwright test --grep-invert @smoke
+npx playwright test --grep-invert @regression
+```
+
+---
 
 ### Report Generation
 
-1. `npx playwright show-report` - to view the report
+After running tests, generate and view HTML reports:
+
+```bash
+npx playwright show-report
+```
+
+Reports are saved in the `reports` directory. Open `index.html` manually or use the command above to view results.
+
+---
+
+### Contribution Guidelines
+
+To contribute:
+
+1. **Fork the repository** and clone your fork.
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make changes** following coding standards.
+4. **Test your changes** to ensure all tests pass.
+5. **Push your branch** and open a pull request with a clear description.
+
+**Coding Standards:**
+
+- Use [Prettier](https://prettier.io/) for formatting.
+- Organize tests using the Page Object Model (POM).
+- Write clear branch names and commit messages.
+- Use meaningful test descriptions.
+
+**Linting & Formatting:**
+
+Run validation before committing:
+```bash
+npm run validate
+```
+This runs Prettier and ESLint for code quality.
+
+---
+
+### Additional Utilities
+
+Generate TypeScript schemas from JSON:
+```bash
+npm run generateSchema -- --input=src/SwagLabs/testData/responseData.json --output=src/SwagLabs/schemas/generatedSchemas.ts --name=generatedSchemas
+```
+
+---
 
 ### Contact
 
-Please log your concern [CONTACT.md](https://github.com/Malitthh/playwright-automation/blob/main/CONTACT.md)
+For questions or support, open an issue or reach out via the repository’s contact channels.
 
-### Contributors
-<!-- <a href="https://github.com/Malitthh/playwright-automation/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=Malitthh/playwright-automation&max=100" alt="Lista de contribuidores" width="100%"/>
-</a> -->
+---
 
-
-
-
+Thank you for contributing and helping us build a robust Playwright automation framework!
 
