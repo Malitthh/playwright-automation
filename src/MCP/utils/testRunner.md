@@ -10,20 +10,18 @@
 - Once a test case execution is done, go to the next test case
 - Once all the test cases are run, generate a Test report in .html format under the testReports folder.
 - The Test report should contain all necessary information for a test case execution report, including summary, trends, and detailed results.
-- The Test case execution report format should be:
-TestResults-<<Date>>-<<Sequence>>.html 
+- The Test case execution report format should be:TestResults-<<Date>>-<<Sequence>>.html 
 - Date → current date in YYYYMMDD format.
 - Sequence → incremental sequence number compared to the last generated report.
 - Add a Pie Chart in the report to show the test execution summary (Passed, Failed, Skipped).
-- Maintain a testHistory.json file to keep historical execution stats. Use this data to show a Test Results Trend (line chart) in the report.
+- Maintain a test history to keep historical execution stats. Use this data to show a Test Results Trend (line chart) in the report.
 - For each test case, include a Detailed Results Table showing:
 - Test case name
 - Status (Passed /Failed /Skipped)
 - Duration
 - Error message (if failed)
 - Screenshot (if failed)
-- Store screenshots of failed steps under:
-/src/MCP/screenshots
+- Store screenshots of failed steps under:/src/MCP/screenshots
 - and embed them into the report for visual debugging.
 - Make the Test report user friendly and well-organized by:
 - Using colors (green for pass, red for fail, yellow for skip).
@@ -33,6 +31,7 @@ TestResults-<<Date>>-<<Sequence>>.html
 - After each run, update the testHistory.json file with the new summary so trends are always up to date.
 - Ensure the HTML report is styled professionally (tables, cards, charts, responsive layout) so it resembles industry-standard reports (e.g., Allure/Extent).
 - Do not try to create playwright scripts.
+- Do not try to create report under default playwright reports folder
 
 ## Test Configurations
 
